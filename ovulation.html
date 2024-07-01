@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ovulation</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class = "phases-body"  data-phase="ovulation">
+<div id="header">
+  <div id="logo">
+    <img src="Photos/Logo.png" alt="logo">
+    <span class="website-name">Wellness Phases</span>
+  </div>
+  <div id="navigation">
+    <nav>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li>
+          <a href="#menstrual-phase" id="menstrual-phase-link">MENSTRUAL PHASE</a>
+
+          <ul id="sub-menu">
+            <li><a href="#" class="phase-link" data-phase="menstruation">MENSTRUAL</a></li>
+            <li><a href="#" class="phase-link" data-phase="follicular">FOLLICULAR</a></li>
+            <li><a href="#" class="phase-link" data-phase="ovulation">OVULATION</a></li>
+            <li><a href="#" class="phase-link" data-phase="luteal">LUTEAL</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- INTRODUCTION -->
+<h1>
+  OVULATION PHASE
+</h1>
+<p>
+  Ovulation is the second phase of the cycle. <br>It is when your ovary releases a mature egg.The egg travels down the fallopian tube toward the uterus to be fertilized by sperm.
+</p>
+
+<h2>
+  SYMPTOMS
+</h2>
+
+<p>
+  During this phase likely symptoms include:
+</p>
+
+<ul>
+  <li>changes in Basal Body Temperature (BBT):</li>
+  <li>lower abdominal pain</li>
+  <li>changes in Cervical Mucus</li>
+  <li> increased Libido</li>
+  <li>breast Tenderness:</li>
+  <li>trouble sleeping</li>
+  <li>mood changes</li>
+</ul>
+
+<h2>
+  NUTRITION
+</h2>
+
+<p>
+  In this phase estrogen it's at the highest peak and progestrone rises as well. In this stage energy is usally high as well. Because of this, it is important to support the liver with eostrogen metabolizing foods and also incooperate anti-inflammatory foods as well.
+</p>
+
+<!-- IMAGE SECTION -->
+<div class="image-column">
+  <div class="image-item" id="carbohydrates">
+    <img style="width:200px;height:200px;" src="Photos/carbohydrates.jpg" alt="Carbohydrates">
+    <p class="label">CARBOHYDRATES</p>
+    <div class="slider" id="carbohydrates-slider"></div>
+  </div>
+  <div class="image-item" id="proteins">
+    <img src="Photos/proteins.jpg" alt="Proteins">
+    <p class="label">PROTEINS</p>
+    <div class="slider" id="proteins-slider"></div>
+  </div>
+  <div class="image-item" id="vitamins">
+    <img src="Photos/vitamins.jpg" alt="Vitamins">
+    <p class="label">VITAMINS</p>
+    <div class="slider" id="vitamins-slider"></div>
+  </div>
+</div>
+
+<div class="image-slider">
+  <h2>FOOD SUGGESTIONS</h2>
+  <div class="slider">
+
+  <div class="food-suggestions" id="foodSuggestions">
+      <!-- Food suggestions will be populated dynamically -->
+  </div>
+
+  <div class="controls">
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+  </div>
+</div>
+</div>
+<script src="project.js"></script>
+</body>
+</html>
