@@ -22,9 +22,9 @@ const foods = {
     proteins: [
       { name: 'Chicken', imageUrl: 'chicken.jpg'},
       { name: 'Eggs' , imageUrl: 'eggs.jpg'},
-      { name: 'Lentils', imageUrl: 'lentils.jpg'},
+      { name: 'fish', imageUrl: 'fish.jpg'},
       { name: 'Greek Yogurt', imageUrl: 'greekyoghurt.jpg' },
-      { name: 'Almonds', imageUrl: 'nuts.jpg' },
+      { name: 'chickpeas', imageUrl: 'chichkpeas.jpg' },
     ],
     carbohydrates: [
       { name: 'Oats', imageUrl: 'oats.jpg' },
@@ -33,12 +33,15 @@ const foods = {
 
     ],
     vitamins: [
-      { name: 'Spinach' , imageUrl: 'spinach.jpg'},
-      { name: 'Broccoli', imageUrl: 'brocolli.jpg' },
+      { name: 'Citrus' , imageUrl: 'citrus.jpeg'},
+      { name: 'Oranges', imageUrl: 'oranges.jpg' },
       { name: 'Bell Peppers' , imageUrl: 'bellpeppers.jpg'},
-      { name: 'Carrots' , imageUrl: 'carrots.jpg'},
-      { name: 'Tomatoes', imageUrl: 'tomatoes.jpg' },
-      { name: 'Bananas', imageUrl: 'bananas.jpg' }
+      { name: 'Brocolli' , imageUrl: 'brocolli.jpg'},
+      { name: 'Leafy greens', imageUrl: 'spinach.jpg' },
+      { name: 'Avocados', imageUrl: 'avocados.jpg' },
+      { name: 'Nuts', imageUrl: 'nuts.jpg' },
+      { name: 'Salad', imageUrl: 'salad.jpg'},
+      { name: 'Sunflower seeds', imageUrl: 'sunflowerseeds.jpeg'}
     ],
   },
   ovulation: {
@@ -47,20 +50,26 @@ const foods = {
       { name: 'Chicken', imageUrl: 'chicken.jpg' },
       { name: 'Tofu', imageUrl: 'tofu.jpg' },
       { name: 'Cottage Cheese', imageUrl: 'cottagecheese.jpg' },
-      { name: 'Chia Seeds', imageUrl: 'chiaseeds.jpg' },
+      { name: 'Fish', imageUrl: 'fish.webp' },
+      
     ],
-    carbohydrates: [
-      { name: 'Brown Rice', imageUrl: 'brownrice.jpg' },
-      { name: 'Sweet Potatoes', imageUrl: 'sweetpotatoes.jpg' },
-      { name: 'Quinoa' , imageUrl: 'quinoa.jpg'},
-      { name: 'Pumpkin', imageUrl: 'pumpkin.jpg' },
+    healthyfats: [
+      { name: 'Avocados', imageUrl: 'avocado.jpg' },
+      { name: 'Nuts', imageUrl: 'nuts.jpg' },
+      { name: 'Sunflower seeds', imageUrl: 'sunflowerseeds.jpeg'},
+      { name: 'Pumpkn seeds', imageUrl: 'pumpkinseeds.jpeg' },
+      { name: 'Olive oil', imageUrl: 'oliveoil.jpg' },
+      { name: 'Chia Seeds', imageUrl: 'chiaseeds.jpg' },
       
     ],
     vitamins: [
       { name: 'Berries', imageUrl: 'berries.jpg' },
-      { name: 'Oranges' , imageUrl: 'oranges.jpg'},
-      { name: 'Avocado', imageUrl: 'avocado.jpg' },
-      { name: 'Mangoes' , imageUrl: 'mangoes.jpg'},
+      { name: 'Oranges', imageUrl: 'oranges.jpg'},
+      { name: 'Leafy greens', imageUrl: 'spinach.jpg' },
+      { name: 'Watermelon' , imageUrl: 'watermelon.jpeg'},
+      { name: 'Cucumber' , imageUrl: 'cucumber.jpg'},
+      { name: 'Celery' , imageUrl: 'celery.jpg'},
+      { name: 'Citrus' , imageUrl: 'citrus.jpg'},
     ],
   },
   luteal: {
@@ -75,14 +84,17 @@ const foods = {
       { name: 'Whole Grain Bread', imageUrl: 'wholegrainbread.jpg' },
       { name: 'Quinoa', imageUrl: 'quinoa.jpg' },
       { name: 'Pasta' , imageUrl: 'pasta.jpg'},
+      { name: 'Brown rice' , imageUrl: 'brownrice.jpg'},
+      { name: 'Sweet potatoes' , imageUrl: 'sweetpotatoes.jpg'},
+      { name: 'Pumpkins' , imageUrl: 'pumpkin.jpg'},
     ],
     vitamins: [
       { name: 'Leafy Greens' , imageUrl: 'spinach.jpg'},
       { name: 'Avocado' , imageUrl: 'avocado.jpg'},
       { name: 'Bell Peppers', imageUrl: 'bellpeppers.jpg' },
-      { name: 'Cauliflower', imageUrl: 'cauliflower.jpg' },
+      { name: 'Dark Chocholate', imageUrl: 'darkchochlate.jpg' },
       { name: 'Beets' , imageUrl: 'beets.jpg'},
-      { name: 'Apples', imageUrl: 'apples.jpg' },
+      { name: 'Oranges', imageUrl: 'oranges.jpg' },
     ],
   },
   menstrual: {
@@ -92,9 +104,11 @@ const foods = {
       { name: 'Chicken' , imageUrl: 'chicken.jpg'},
       { name: 'Green Peas', imageUrl: 'greengrams.jpg' },
       { name: 'Nuts', imageUrl: 'nuts.jpg' },
+      { name: 'Fish', imageUrl: 'fish.jpg' },
+      { name: 'Beans', imageUrl: 'beans.jpeg' },
+      { name: 'Tofu', imageUrl: 'tofu.jpg' },
     ],
     carbohydrates: [
-      { name: 'Oats', imageUrl: 'oats.jpg' },
       { name: 'Sweet Potatoes', imageUrl: 'sweetpotatoes.jpg' },
       { name: 'Brown Rice' , imageUrl: 'brownrice.jpg'},
       { name: 'Pumpkin Soup', imageUrl: 'pumpkin.jpg' },
@@ -104,8 +118,8 @@ const foods = {
       { name: 'Leafy Greens' , imageUrl: 'spinach.jpg'},
       { name: 'Oranges' , imageUrl: 'oranges.jpg'},
       { name: 'Berries', imageUrl: 'berries.jpg' },
-      { name: 'Dark Chocholate', imageUrl: 'darkchochlate.jpg' },
       { name: 'Pineapple' , imageUrl: 'pineapple.jpg'},
+      { name: 'Citrus Fruits', imageUrl: 'citrus.jpeg' },
     ],
   },
 };
