@@ -5,22 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Menstruation</title>
 <link rel="stylesheet" href="styles.css">
-<script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-<script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "oCcffnG49y4B5X1iP",
-      });
-   })();
-</script>
+
 </head>
 <body class="phases-body" data-phase="menstrual">
 <div id="header">
 <div id="logo">
   <img src="Photos/Logo.png" alt="logo">
-  <span class="website-name">Wellness Phases</span>
 </div>
 <div id="navigation">
   <nav>
@@ -44,55 +34,50 @@
 <!-- FORM SECTION -->
 
 <div class="container-contact">
-  <div class="contact-form">
-    <form  id="contact-form" class="contact-form">
-      <h2>CONTACT US</h2>
-      <form action="#" method="POST" id="contact-form">
-          <div class="form-group">
-              <label for="name">NAME:</label>
-              <input type="text" placeholder="Enter your name" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-              <label for="email">EMAIL:</label>
-              <input type="email" placeholder="Enter your email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-              <label for="message">MESSAGE:</label>
-              <textarea id="message" placeholder="Type your message here" name="message" required></textarea>
-          </div>
-          <div class="form-group" id = "submitButton">
-              <button type="submit">SUBMIT</button>
-          </div>
-      </form>
-  </div>
+  <form  id="contact-form" >
+  <h2>CONTACT US</h2>
+    <div class="form-group">
+        <label for="name">NAME:</label>
+        <input type="text" placeholder="Enter your name" id="name" name="name" required >
+    </div>
+    <div class="form-group">
+        <label for="email">EMAIL:</label>
+        <input type="email" placeholder="Enter your email" id="email" name="email" required >
+    </div>
+    <div class="form-group">
+        <label for="message">MESSAGE:</label>
+        <textarea id="message" placeholder="Type your message here" name="message" required ></textarea>
+    </div>
+    <div class="form-group" id = "submitButton">
+        <button type="submit">SUBMIT</button>
+    </div>
+    </form>
+  
   
   <section id="find-us-section">
-    <h2>WHERE CAN YOU FIND US?</h2>
+  <h2>WHERE CAN YOU FIND US?</h2>
 
-    <div class="social-icons" >
-        <div class="social-icon">
-            <img src="Photos/facebooklogo.png" alt="Facebook">
-            <span>WellnessPhases</span>
-        </div>
-
-        <div class="social-icon">
-            <img src="Photos/xlogo.JPG" alt="Twitter">
-            <span>WellnessPhases</span>
-        </div>
-
-        <div class="social-icon">
-            <img src="Photos/instagramlogo.png" alt="Instagram">
-            <span>Wellness-Phases</span>
-        </div>
-
-        <p><strong>PHONE:</strong> +0200356729</p>
-        <p><strong>EMAIL:</strong> wellnessphases@outlook.com</p>
-       
+  <div class="social-icons" >
+    <div class="social-icon">
+        <img src="Photos/facebooklogo.JPG" alt="Facebook">
+        <span>WellnessPhases</span>
     </div>
+
+    <div class="social-icon">
+        <img src="Photos/xlogo.JPG" alt="Twitter">
+        <span>WellnessPhases</span>
+    </div>
+
+    <div class="social-icon">
+        <img src="Photos/instagramlogo.JPG" alt="Instagram">
+        <span>Wellness-Phases</span>
+    </div>
+      <br>
+      <p><strong>PHONE:</strong> +0200356729</p>
+      <p><strong>EMAIL:</strong> wellnessphases@outlook.com</p>
+    </div>
+  </div>
 </section>
-
-
-  
 
 <script src="project.js"></script>
 </body>

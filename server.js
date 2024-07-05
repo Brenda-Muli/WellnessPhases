@@ -3,6 +3,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import nodemailer from 'nodemailer';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // Use built-in Express JSON parser
 
 // Serve static files
 app.use('/Photosapi', express.static(path.join(__dirname, 'Photosapi')));
@@ -20,88 +21,85 @@ app.use('/Photosapi', express.static(path.join(__dirname, 'Photosapi')));
 const foods = {
   follicular: {
     proteins: [
-      { name: 'Chicken', imageUrl: 'chicken.jpg'},
-      { name: 'Eggs' , imageUrl: 'eggs.jpg'},
-      { name: 'fish', imageUrl: 'fish.jpg'},
+      { name: 'Chicken', imageUrl: 'chicken.jpg' },
+      { name: 'Eggs', imageUrl: 'eggs.jpg' },
+      { name: 'fish', imageUrl: 'fish.jpg' },
       { name: 'Greek Yogurt', imageUrl: 'greekyoghurt.jpg' },
       { name: 'chickpeas', imageUrl: 'chichkpeas.jpg' },
     ],
     carbohydrates: [
       { name: 'Oats', imageUrl: 'oats.jpg' },
-      { name: 'Quinoa' , imageUrl: 'quinoa.jpg'},
-      { name: 'Sweet Potatoes' , imageUrl: 'sweetpotatoes.jpg'},
-
+      { name: 'Quinoa', imageUrl: 'quinoa.jpg' },
+      { name: 'Sweet Potatoes', imageUrl: 'sweetpotatoes.jpg' },
     ],
     vitamins: [
-      { name: 'Citrus' , imageUrl: 'citrus.jpeg'},
+      { name: 'Citrus', imageUrl: 'citrus.jpeg' },
       { name: 'Oranges', imageUrl: 'oranges.jpg' },
-      { name: 'Bell Peppers' , imageUrl: 'bellpeppers.jpg'},
-      { name: 'Brocolli' , imageUrl: 'brocolli.jpg'},
+      { name: 'Bell Peppers', imageUrl: 'bellpeppers.jpg' },
+      { name: 'Brocolli', imageUrl: 'brocolli.jpg' },
       { name: 'Leafy greens', imageUrl: 'spinach.jpg' },
       { name: 'Avocados', imageUrl: 'avocados.jpg' },
       { name: 'Nuts', imageUrl: 'nuts.jpg' },
-      { name: 'Salad', imageUrl: 'salad.jpg'},
-      { name: 'Sunflower seeds', imageUrl: 'sunflowerseeds.jpeg'}
+      { name: 'Salad', imageUrl: 'salad.jpg' },
+      { name: 'Sunflower seeds', imageUrl: 'sunflowerseeds.jpeg' },
     ],
   },
   ovulation: {
     proteins: [
-      { name: 'Salmon' , imageUrl: 'salmon.jpg'},
+      { name: 'Salmon', imageUrl: 'salmon.jpg' },
       { name: 'Chicken', imageUrl: 'chicken.jpg' },
       { name: 'Tofu', imageUrl: 'tofu.jpg' },
       { name: 'Cottage Cheese', imageUrl: 'cottagecheese.jpg' },
       { name: 'Fish', imageUrl: 'fish.webp' },
-      
     ],
     healthyfats: [
       { name: 'Avocados', imageUrl: 'avocado.jpg' },
       { name: 'Nuts', imageUrl: 'nuts.jpg' },
-      { name: 'Sunflower seeds', imageUrl: 'sunflowerseeds.jpeg'},
+      { name: 'Sunflower seeds', imageUrl: 'sunflowerseeds.jpeg' },
       { name: 'Pumpkn seeds', imageUrl: 'pumpkinseeds.jpeg' },
       { name: 'Olive oil', imageUrl: 'oliveoil.jpg' },
       { name: 'Chia Seeds', imageUrl: 'chiaseeds.jpg' },
-      
     ],
     vitamins: [
       { name: 'Berries', imageUrl: 'berries.jpg' },
-      { name: 'Oranges', imageUrl: 'oranges.jpg'},
+      { name: 'Oranges', imageUrl: 'oranges.jpg' },
       { name: 'Leafy greens', imageUrl: 'spinach.jpg' },
-      { name: 'Watermelon' , imageUrl: 'watermelon.jpeg'},
-      { name: 'Cucumber' , imageUrl: 'cucumber.jpg'},
-      { name: 'Celery' , imageUrl: 'celery.jpg'},
-      { name: 'Citrus' , imageUrl: 'citrus.jpg'},
+      { name: 'Watermelon', imageUrl: 'watermelon.jpeg' },
+      { name: 'Cucumber', imageUrl: 'cucumber.jpg' },
+      { name: 'Celery', imageUrl: 'celery.jpg' },
+      { name: 'Citrus', imageUrl: 'citrus.jpg' },
     ],
   },
   luteal: {
     proteins: [
-      { name: 'Tofu' , imageUrl: 'tofu.jpg'},
-      { name: 'Chickpeas' , imageUrl: 'chickpeas.jpg'},
+      { name: 'Tofu', imageUrl: 'tofu.jpg' },
+      { name: 'Chickpeas', imageUrl: 'chickpeas.jpg' },
       { name: 'Chicken', imageUrl: 'chicken.jpg' },
-      { name: 'Turkey' , imageUrl: 'turkey.jpg'},
+      { name: 'Turkey', imageUrl: 'turkey.jpg' },
       { name: 'Peanut Butter', imageUrl: 'peanutbutter.jpg' },
     ],
     carbohydrates: [
       { name: 'Whole Grain Bread', imageUrl: 'wholegrainbread.jpg' },
       { name: 'Quinoa', imageUrl: 'quinoa.jpg' },
-      { name: 'Pasta' , imageUrl: 'pasta.jpg'},
-      { name: 'Brown rice' , imageUrl: 'brownrice.jpg'},
-      { name: 'Sweet potatoes' , imageUrl: 'sweetpotatoes.jpg'},
-      { name: 'Pumpkins' , imageUrl: 'pumpkin.jpg'},
+      { name: 'Pasta', imageUrl: 'pasta.jpg' },
+      { name: 'Brown rice', imageUrl: 'brownrice.jpg' },
+      { name: 'Sweet potatoes', imageUrl: 'sweetpotatoes.jpg' },
+      { name: 'Pumpkins', imageUrl: 'pumpkin.jpg' },
     ],
     vitamins: [
-      { name: 'Leafy Greens' , imageUrl: 'spinach.jpg'},
-      { name: 'Avocado' , imageUrl: 'avocado.jpg'},
+      { name: 'Leafy Greens', imageUrl: 'spinach.jpg' },
+      { name: 'Avocado', imageUrl: 'avocado.jpg' },
       { name: 'Bell Peppers', imageUrl: 'bellpeppers.jpg' },
       { name: 'Dark Chocholate', imageUrl: 'darkchochlate.jpg' },
-      { name: 'Beets' , imageUrl: 'beets.jpg'},
+      { name: 'Beets', imageUrl: 'beets.jpg' },
       { name: 'Oranges', imageUrl: 'oranges.jpg' },
     ],
   },
   menstrual: {
     proteins: [
-      { name: 'Beef' , imageUrl: 'beef.jpg'},
-      { name: 'Lentils' , imageUrl: 'lentils.jpg'},
-      { name: 'Chicken' , imageUrl: 'chicken.jpg'},
+      { name: 'Beef', imageUrl: 'beef.jpg' },
+      { name: 'Lentils', imageUrl: 'lentils.jpg' },
+      { name: 'Chicken', imageUrl: 'chicken.jpg' },
       { name: 'Green Peas', imageUrl: 'greengrams.jpg' },
       { name: 'Nuts', imageUrl: 'nuts.jpg' },
       { name: 'Fish', imageUrl: 'fish.jpg' },
@@ -110,15 +108,14 @@ const foods = {
     ],
     carbohydrates: [
       { name: 'Sweet Potatoes', imageUrl: 'sweetpotatoes.jpg' },
-      { name: 'Brown Rice' , imageUrl: 'brownrice.jpg'},
+      { name: 'Brown Rice', imageUrl: 'brownrice.jpg' },
       { name: 'Pumpkin Soup', imageUrl: 'pumpkin.jpg' },
-      
     ],
     vitamins: [
-      { name: 'Leafy Greens' , imageUrl: 'spinach.jpg'},
-      { name: 'Oranges' , imageUrl: 'oranges.jpg'},
+      { name: 'Leafy Greens', imageUrl: 'spinach.jpg' },
+      { name: 'Oranges', imageUrl: 'oranges.jpg' },
       { name: 'Berries', imageUrl: 'berries.jpg' },
-      { name: 'Pineapple' , imageUrl: 'pineapple.jpg'},
+      { name: 'Pineapple', imageUrl: 'pineapple.jpg' },
       { name: 'Citrus Fruits', imageUrl: 'citrus.jpeg' },
     ],
   },
@@ -132,6 +129,41 @@ app.get('/api/nutrition/:phase/:category', (req, res) => {
     res.json(phaseData[category]);
   } else {
     res.status(404).send('Data not found');
+  }
+});
+
+// POST endpoint to handle form submission
+app.post('/contact', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ success: false, message: 'All fields are required.' });
+  }
+
+  // Create a transporter object using the default SMTP transport
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'mwengibrenda@gmail.com',
+      pass: '', // Add your password or an app-specific password here
+    },
+  });
+
+  // Email options
+  const mailOptions = {
+    from: email,
+    to: 'mwengibrenda@gmail.com',
+    subject: `Contact Form Submission from ${name}`,
+    text: message,
+  };
+
+  try {
+    // Send mail
+    await transporter.sendMail(mailOptions);
+    res.json({ success: true, message: 'Message successfully sent.' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ success: false, message: 'Unable to send message.' });
   }
 });
 

@@ -6,6 +6,15 @@ div {
   border: none;
 }
 
+h1,h2{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+p, ul{
+  font-family:Cambria, Cochin, Georgia, Times;
+  font-size:20px;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -14,8 +23,26 @@ body {
 }
 
 /* Header section */
-#search-section{
-  margin-right: 500px;
+#search-form{
+  margin-right: 400px;
+}
+
+#search-input{
+  border-radius: 8px;
+  border:none;
+  height:20px;
+}
+
+#button-phases{
+  border-radius:2px;
+  background-color: rgb(222, 20, 60);
+  color: white;
+  border: none;
+}
+
+#search-button:hover{
+  cursor: pointer;
+  background-color: rgb(250, 152, 172);
 }
 
 #container {
@@ -51,7 +78,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  z-index: 1; /* Ensure the header is above the image */
+  z-index: 1; 
 }
 
 #logo{
@@ -64,15 +91,6 @@ body {
   border-radius: 25px;
   margin-right: 10px;
   cursor: pointer;
-}
-
-.website-name{
-  font-size:10px;
-  font-weight: bold;
-  color:rgb(222, 20, 60);
-  text-transform: uppercase;
-  font-style: italic;
-
 }
 
 /* Main links */
@@ -180,7 +198,6 @@ body {
 /* About section styles */
 .about-body{
   background-color:white;
-  /* background-image: radial-gradient( circle,rgb(246, 123, 147),rgba(222, 20, 60, 0.6)  ); */
   color: black;
 }
 
@@ -206,10 +223,8 @@ body {
 }
 
 #text-container{
-  margin-left: 50px; /* Adjust spacing as needed */
-  max-width: 60%; /* Adjust width as needed */
-  font-size: 20px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular';
+  margin-left: 50px; 
+  max-width: 60%; 
 }
 
 #photo-two img{
@@ -223,11 +238,6 @@ body {
   border-block-color: rgb(250, 152, 172) ;
 }
 
-#section-text{
-  max-width: 100%;
-  font-size: 20px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular';
-}
 .phases-body{
   background-color:rgb(255, 255, 255) ;
 }
@@ -323,6 +333,7 @@ body {
   display:flex;
   justify-content: center;
   margin-left:10px;
+  display:none;
  
 }
 
@@ -373,7 +384,7 @@ body {
 
 /* about us find us section */
 #find-us-section {
-  margin-top: 50px;
+  margin-top: 180px;
   text-align: center;
   border-radius: 5px;
   padding: 20px;
@@ -387,7 +398,6 @@ body {
   border-radius: 30px;
   margin-left: 40px;
 }
-
 
 .social-icon img {
   width: 50px;
@@ -407,10 +417,9 @@ body {
   align-items: center;
   height: 100vh;
   margin-top:65px;
-  
-
 }
-.contact-form {
+
+#contact-form {
   background-color: rgb(255, 255, 255);
   padding: 40px;
   border-radius: 8px;
@@ -458,24 +467,4 @@ body {
 .form-group button:hover {
   background-color: rgb(255, 204, 204);
 }
-.contact-image {
-  width: 30%;
-  margin-left: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-.contact-image img {
-  width: 100%;
-  height: auto;
-}
-@media screen and (max-width: 768px) {
-  .container {
-      flex-direction: column;
-  }
-  .contact-form, .contact-image {
-      width: 100%;
-      margin-left: 0;
-      margin-top: 20px;
-  }
-}
+

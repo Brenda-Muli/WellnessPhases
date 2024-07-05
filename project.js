@@ -1,27 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-  // Function to display phases when the menstrual phase link is clicked
+ // Function to display phases when the menstrual phase link is clicked
   const initializeSubMenu = () => {
-    const subMenu = document.getElementById('sub-menu');
-    const menstrualPhaseLink = document.getElementById('menstrual-phase-link');
+   const subMenu = document.getElementById('sub-menu');
+   const menstrualPhaseLink = document.getElementById('menstrual-phase-link');
 
-    if (subMenu && menstrualPhaseLink) {
-      subMenu.style.display = 'none';
-      menstrualPhaseLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
-      });
+  if (subMenu && menstrualPhaseLink) {
+    subMenu.style.display = 'none';
+    menstrualPhaseLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+    });
 
-      // Close submenu if clicking outside
-      document.addEventListener('click', (event) => {
-        if (event.target !== menstrualPhaseLink && !menstrualPhaseLink.contains(event.target)) {
-          subMenu.style.display = 'none';
-        }
-      });
-    } else {
-      console.error('SubMenu or Menstrual Phase Link not found');
-    }
-  };
+  // Close submenu if clicking outside
+    document.addEventListener('click', (event) => {
+      if (event.target !== menstrualPhaseLink && !menstrualPhaseLink.contains(event.target)) {
+        subMenu.style.display = 'none';
+      }
+    });
+  } else {
+    console.error('SubMenu or Menstrual Phase Link not found');
+  }
+};
 
   initializeSubMenu();
 
@@ -67,61 +66,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to navigate to specific phase pages
   const initializePhaseNavigation = () => {
-    const navigateToPhase = (phase) => {
-      console.log(`Navigating to ${phase}.html`);
-      window.location.href = `${phase}.html`;
-    };
-
-    const navigationLinks = document.querySelectorAll('.phase-link');
-    navigationLinks.forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        const phase = link.dataset.phase;
-        navigateToPhase(phase);
-      });
-    });
+  const navigateToPhase = (phase) => {
+    console.log(`Navigating to ${phase}.html`);
+    window.location.href = `${phase}.html`;
   };
+
+  const navigationLinks = document.querySelectorAll('.phase-link');
+  navigationLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const phase = link.dataset.phase;
+      navigateToPhase(phase);
+    });
+  });
+};
 
   initializePhaseNavigation();
 
-});
-
-// Function to fetch and display food suggestions
-const displayFoodSuggestions = async (phase, category) => {
-  try {
-    const response = await fetch(`http://localhost:3000/api/nutrition/${phase}/${category}`);
-    if (!response.ok) {
-      throw new Error('Data not found');
-    }
-    const data = await response.json();
-    const foodSuggestions = document.getElementById('foodSuggestions');
-    foodSuggestions.innerHTML = '';
-
-    data.forEach(item => {
-      const foodItem = document.createElement('div');
-      foodItem.className = 'food-item';
-
-      const foodImage = document.createElement('img');
-      foodImage.src = `http://localhost:3000/Photosapi/${item.imageUrl}`;
-
-      const name = document.createElement('p');
-      name.textContent = item.name;
-
-      foodItem.appendChild(foodImage);
-      foodItem.appendChild(name);
-      foodSuggestions.appendChild(foodItem);
-    });
-
-    // Initialize slider
-    initializeSlider();
-
-  } catch (error) {
-    console.error('Error fetching food suggestions:', error);
-  }
-};
-
-// Function to handle image clicks to display food suggestions
-const initializeImageClicks = () => {
+  // Function to handle image clicks to display food suggestions
+  const initializeImageClicks = () => {
   const handleImageClick = async (event) => {
     const imageItem = event.currentTarget;
     const category = imageItem.id;
@@ -140,10 +103,10 @@ const initializeImageClicks = () => {
   });
 };
 
-initializeImageClicks();
+  initializeImageClicks();
 
-// Function to clear food suggestions when clicking outside
-const initializeOutsideClickHandler = () => {
+  // Function to clear food suggestions when clicking outside
+  const initializeOutsideClickHandler = () => {
   document.addEventListener('click', (event) => {
     const foodSuggestions = document.getElementById('foodSuggestions');
     const controls = document.querySelector('.controls');
@@ -153,44 +116,44 @@ const initializeOutsideClickHandler = () => {
   });
 };
 
-// Function to initialize the slider
-const initializeSlider = () => {
-  const foodItems = document.querySelectorAll('#foodSuggestions .food-item');
-  let currentIndex = 0;
+  initializeOutsideClickHandler();
 
-  const showItem = (index) => {
-    foodItems.forEach((item, i) => {
-      item.style.display = i === index ? 'block' : 'none';
-    });
-  };
+  // Function to initialize the slider
+  const initializeSlider = () => {
+    const foodItems = document.querySelectorAll('#foodSuggestions .food-item');
+    let currentIndex = 0;
 
-  const showNext = () => {
-    currentIndex = (currentIndex + 1) % foodItems.length;
+    const showItem = (index) => {
+      foodItems.forEach((item, i) => {
+        item.style.display = i === index ? 'block' : 'none';
+      });
+    };
+
+    const showNext = () => {
+      currentIndex = (currentIndex + 1) % foodItems.length;
+      showItem(currentIndex);
+    };
+
+    const showPrevious = () => {
+      currentIndex = (currentIndex - 1 + foodItems.length) % foodItems.length;
+      showItem(currentIndex);
+    };
+
+    const nextButton = document.getElementById('next');
+    const prevButton = document.getElementById('prev');
+
+    if (nextButton && prevButton) {
+      nextButton.addEventListener('click', showNext);
+      prevButton.addEventListener('click', showPrevious);
+    }
+
     showItem(currentIndex);
   };
 
-  const showPrevious = () => {
-    currentIndex = (currentIndex - 1 + foodItems.length) % foodItems.length;
-    showItem(currentIndex);
-  };
+  initializeSlider();
 
-  const nextButton = document.getElementById('next');
-  const prevButton = document.getElementById('prev');
-
-  if (nextButton && prevButton) {
-    nextButton.addEventListener('click', showNext);
-    prevButton.addEventListener('click', showPrevious);
-  }
-
-  showItem(currentIndex);
-};
-
-
-
-initializeOutsideClickHandler();
-
-// Function to display feedback 
-const initializeFeedbackSlider = () => {
+  // Function to display feedback 
+  const initializeFeedbackSlider = () => {
   const feedbackItems = document.querySelectorAll('.feedback-item');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
@@ -210,103 +173,98 @@ const initializeFeedbackSlider = () => {
     currentFeedbackIndex += n * 2;
     const numItems = feedbackItems.length;
     if (currentFeedbackIndex < 0) {
-      currentFeedbackIndex = numItems - 2; // Display the last two items
+      currentFeedbackIndex = numItems - 2; 
     } else if (currentFeedbackIndex >= numItems) {
       currentFeedbackIndex = 0;
     }
     showFeedback(currentFeedbackIndex);
   };
 
-  prevBtn.addEventListener('click', () => changeFeedback(-1));
-  nextBtn.addEventListener('click', () => changeFeedback(1));
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => changeFeedback(-1));
+      nextBtn.addEventListener('click', () => changeFeedback(1));
+    }
 
-  showFeedback(currentFeedbackIndex);
-};
+    showFeedback(currentFeedbackIndex);
+  };
 
-initializeFeedbackSlider();
-// Function to slide in social icons and contact details
-const initializeSlideInElements = () => {
-  const socialIcons = document.querySelectorAll('.social-icon');
-  const contactDetails = document.getElementById('contact-details');
+  initializeFeedbackSlider();
 
-  const slideInElements = () => {
-    socialIcons.forEach(icon => {
-      icon.style.transform = 'translateX(0)';
-      icon.style.opacity = '1';
+  // Function to handle search form submission
+  const initializeSearchForm = () => {
+    const phasesButton = document.getElementById('button-phases');
+    const searchPhase = document.getElementById('search-phase');
+
+  if (phasesButton) {
+    phasesButton.addEventListener('click', (event) => {
+      event.preventDefault(); 
+
+    const searchQuery = searchPhase.value.toLowerCase().trim();
+
+    switch (true) {
+      case searchQuery.includes('menstrual'):
+        window.location.href = 'menstruation.html';
+        break;
+      case searchQuery.includes('ovulation'):
+        window.location.href = 'ovulation.html';
+        break;
+      case searchQuery.includes('follicular'):
+        window.location.href = 'follicular.html';
+        break;
+      case searchQuery.includes('luteal'):
+        window.location.href = 'luteal.html';
+        break;
+      default:
+        window.location.href = 'index.html';
+        break;
+    }
     });
-
-    contactDetails.style.transform = 'translateX(0)';
-    contactDetails.style.opacity = '1';
-  };
-
-  const checkScroll = () => {
-    const findUsSection = document.getElementById('find-us-section');
-    const findUsSectionTop = findUsSection.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if (findUsSectionTop < windowHeight * 0.75) {
-      slideInElements();
-      window.removeEventListener('scroll', checkScroll); // Remove listener once animation has occurred
-    }
-  };
-
-  window.addEventListener('scroll', checkScroll);
-};
-
-initializeSlideInElements();
-
-// Function to handle search form submission
-const initializeSearchForm = () => {
-  const searchForm = document.getElementById('search-form');
-  const searchInput = document.getElementById('search-input');
-
-  searchForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const searchTerm = searchInput.value.toLowerCase();
-
-    if (searchTerm.includes('menstrual')) {
-      window.location.href = 'menstrual.html';
-    } else if (searchTerm.includes('ovulation')) {
-      window.location.href = 'ovulation.html';
-    } else if (searchTerm.includes('follicular')) {
-      window.location.href = 'follicular.html';
-    } else if (searchTerm.includes('luteal')) {
-      window.location.href = 'luteal.html';
     } else {
-      alert('No relevant page found for your search term.');
-   
+      console.error('Search button not found');
     }
-  });
-};
-
-initializeSearchForm();
-
-//function for contact form
-const form = document.getElementById('contact-form');
-
-// Add submit event listener to the form
-form.addEventListener('submit', function(e) {
-  e.preventDefault(); // Prevent the default form submission
-
-  // Collect form data
-  let params = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    message: document.getElementById("message").value,
   };
 
-  const serviceID = 'service_nmgl9u4'; // Replace with your EmailJS service ID
-  const templateID = 'template_ycy0u7p'; // Replace with your EmailJS template ID
+  initializeSearchForm();
 
-  // Send email using EmailJS
-  emailjs.send(serviceID, templateID, params)
-    .then((res) => {
-      // Clear form fields
-      form.reset();
+  // Function to send details of user to my email
+  const contactForm = document.getElementById('contact-form');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const messageInput = document.getElementById('message');
 
-      // Log the response and show success message
-      console.log(res);
-      alert('Your message has been sent successfully!');
-    })
-    .catch((err) => console.error('Error sending email:', err));
+  if (contactForm && nameInput && emailInput && messageInput) {
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const name = nameInput.value;
+      const email = emailInput.value;
+      const message = messageInput.value;
+
+      try {
+        const response = await fetch('http://localhost:3000/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, message }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert(result.message);
+          nameInput.value = '';
+          emailInput.value = '';
+          messageInput.value = '';
+        } else {
+          alert(result.message);
+        }
+      } catch (error) {
+        alert('Unable to send message.');
+      }
+    });
+  } else {
+    console.error('Contact form elements not found.');
+  }
+
 });
