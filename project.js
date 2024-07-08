@@ -82,9 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
 };
 
   initializePhaseNavigation();
-
-  // Function to handle image clicks to display food suggestions
-  const initializeImageClicks = () => {
+// Function to handle image clicks to display food suggestions
+const initializeImageClicks = () => {
   const handleImageClick = async (event) => {
     const imageItem = event.currentTarget;
     const category = imageItem.id;
@@ -103,54 +102,87 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 };
 
-  initializeImageClicks();
+// Function to display food suggestions based on phase and category
+const displayFoodSuggestions = async (phase, category) => {
+  const url = `http://localhost:3000/api/nutrition/${phase}/${category}`;
+  try {
+    const response = await fetch(url);
+    console.log(`Fetch request to ${url} responded with status ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data. Status: ${response.status} - ${response.statusText}`);
+    }
+    const data = await response.json();
 
-  // Function to clear food suggestions when clicking outside
-  const initializeOutsideClickHandler = () => {
-  document.addEventListener('click', (event) => {
     const foodSuggestions = document.getElementById('foodSuggestions');
+    foodSuggestions.innerHTML = ''; // Clear previous content
+    
+    data.forEach(food => {
+      const foodItem = document.createElement('div');
+      foodItem.classList.add('food-item');
+      foodItem.innerHTML = `
+        <img src="Photosapi/${food.imageUrl}" alt="${food.name}">
+        <p>${food.name}</p>
+      `;
+      foodSuggestions.appendChild(foodItem);
+    });
+
+  // Ensure controls are visible after updating food suggestions
+    document.querySelector('.controls').style.display = 'block';
+
+  // Initialize slider after updating food suggestions
+    initializeSlider();
+
+  } catch (error) {
+    console.error('Error displaying food suggestions:', error);
+  }
+};
+
+// Function to initialize the slider
+const initializeSlider = () => {
+  const foodItems = document.querySelectorAll('#foodSuggestions .food-item');
+  let currentIndex = 0;
+
+  const showItem = (index) => {
+    foodItems.forEach((item, i) => {
+      item.style.display = i === index ? 'block' : 'none';
+    });
+  };
+
+  const showNext = () => {
+    currentIndex = (currentIndex + 1) % foodItems.length;
+    showItem(currentIndex);
+  };
+
+  const showPrevious = () => {
+    currentIndex = (currentIndex - 1 + foodItems.length) % foodItems.length;
+    showItem(currentIndex);
+  };
+
+  const nextButton = document.getElementById('next');
+  const prevButton = document.getElementById('prev');
+
+  if (nextButton && prevButton) {
+    nextButton.addEventListener('click', showNext);
+    prevButton.addEventListener('click', showPrevious);
+  }
+
+  showItem(currentIndex);
+};
+
+// Function to handle clicks outside food suggestions to hide controls
+const initializeOutsideClickHandler = () => {
+  document.addEventListener('click', (event) => {
     const controls = document.querySelector('.controls');
+    const foodSuggestions = document.getElementById('foodSuggestions');
     if (controls && !controls.contains(event.target) && !foodSuggestions.contains(event.target)) {
       controls.style.display = 'none';
     }
   });
 };
 
-  initializeOutsideClickHandler();
-
-  // Function to initialize the slider
-  const initializeSlider = () => {
-    const foodItems = document.querySelectorAll('#foodSuggestions .food-item');
-    let currentIndex = 0;
-
-    const showItem = (index) => {
-      foodItems.forEach((item, i) => {
-        item.style.display = i === index ? 'block' : 'none';
-      });
-    };
-
-    const showNext = () => {
-      currentIndex = (currentIndex + 1) % foodItems.length;
-      showItem(currentIndex);
-    };
-
-    const showPrevious = () => {
-      currentIndex = (currentIndex - 1 + foodItems.length) % foodItems.length;
-      showItem(currentIndex);
-    };
-
-    const nextButton = document.getElementById('next');
-    const prevButton = document.getElementById('prev');
-
-    if (nextButton && prevButton) {
-      nextButton.addEventListener('click', showNext);
-      prevButton.addEventListener('click', showPrevious);
-    }
-
-    showItem(currentIndex);
-  };
-
-  initializeSlider();
+// Initialization
+initializeImageClicks();
+initializeOutsideClickHandler();
 
   // Function to display feedback 
   const initializeFeedbackSlider = () => {
@@ -223,48 +255,49 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Search button not found');
     }
   };
+});
 
   initializeSearchForm();
 
-  // Function to send details of user to my email
-  const contactForm = document.getElementById('contact-form');
-  const nameInput = document.getElementById('name');
-  const emailInput = document.getElementById('email');
-  const messageInput = document.getElementById('message');
+//   // Function to send details of user to my email
+//   const contactForm = document.getElementById('contact-form');
+//   const nameInput = document.getElementById('name');
+//   const emailInput = document.getElementById('email');
+//   const messageInput = document.getElementById('message');
 
-  if (contactForm && nameInput && emailInput && messageInput) {
-    contactForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
+//   if (contactForm && nameInput && emailInput && messageInput) {
+//     contactForm.addEventListener('submit', async (event) => {
+//       event.preventDefault();
 
-      const name = nameInput.value;
-      const email = emailInput.value;
-      const message = messageInput.value;
+//       const name = nameInput.value;
+//       const email = emailInput.value;
+//       const message = messageInput.value;
 
-      try {
-        const response = await fetch('http://localhost:3000/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name, email, message }),
-        });
+//       try {
+//         const response = await fetch('http://localhost:3000/contact', {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify({ name, email, message }),
+//         });
 
-        const result = await response.json();
+//         const result = await response.json();
 
-        if (result.success) {
-          alert(result.message);
-          nameInput.value = '';
-          emailInput.value = '';
-          messageInput.value = '';
-        } else {
-          alert(result.message);
-        }
-      } catch (error) {
-        alert('Unable to send message.');
-      }
-    });
-  } else {
-    console.error('Contact form elements not found.');
-  }
+//         if (result.success) {
+//           alert(result.message);
+//           nameInput.value = '';
+//           emailInput.value = '';
+//           messageInput.value = '';
+//         } else {
+//           alert(result.message);
+//         }
+//       } catch (error) {
+//         alert('Unable to send message.');
+//       }
+//     });
+//   } else {
+//     console.error('Contact form elements not found.');
+//   }
 
-});
+// });

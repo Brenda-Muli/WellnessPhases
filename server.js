@@ -3,7 +3,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import nodemailer from 'nodemailer';
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +17,11 @@ app.use(express.json()); // Use built-in Express JSON parser
 // Serve static files
 app.use('/Photosapi', express.static(path.join(__dirname, 'Photosapi')));
 
+// Define root route
+app.get('/', (req, res) => {
+  res.send('Server is running');
+});
+
 // Sample data for carbohydrates, proteins, and vitamins for each phase
 const foods = {
   follicular: {
@@ -25,7 +30,7 @@ const foods = {
       { name: 'Eggs', imageUrl: 'eggs.jpg' },
       { name: 'fish', imageUrl: 'fish.jpg' },
       { name: 'Greek Yogurt', imageUrl: 'greekyoghurt.jpg' },
-      { name: 'chickpeas', imageUrl: 'chichkpeas.jpg' },
+      { name: 'chickpeas', imageUrl: 'chickpeas.jpg' },
     ],
     carbohydrates: [
       { name: 'Oats', imageUrl: 'oats.jpg' },
@@ -38,7 +43,7 @@ const foods = {
       { name: 'Bell Peppers', imageUrl: 'bellpeppers.jpg' },
       { name: 'Brocolli', imageUrl: 'brocolli.jpg' },
       { name: 'Leafy greens', imageUrl: 'spinach.jpg' },
-      { name: 'Avocados', imageUrl: 'avocados.jpg' },
+      { name: 'Avocados', imageUrl: 'avocado.jpg' },
       { name: 'Nuts', imageUrl: 'nuts.jpg' },
       { name: 'Salad', imageUrl: 'salad.jpg' },
       { name: 'Sunflower seeds', imageUrl: 'sunflowerseeds.jpeg' },
@@ -132,42 +137,6 @@ app.get('/api/nutrition/:phase/:category', (req, res) => {
   }
 });
 
-// POST endpoint to handle form submission
-app.post('/contact', async (req, res) => {
-  const { name, email, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ success: false, message: 'All fields are required.' });
-  }
-
-  // Create a transporter object using the default SMTP transport
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'mwengibrenda@gmail.com',
-      pass: '', // Add your password or an app-specific password here
-    },
-  });
-
-  // Email options
-  const mailOptions = {
-    from: email,
-    to: 'mwengibrenda@gmail.com',
-    subject: `Contact Form Submission from ${name}`,
-    text: message,
-  };
-
-  try {
-    // Send mail
-    await transporter.sendMail(mailOptions);
-    res.json({ success: true, message: 'Message successfully sent.' });
-  } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ success: false, message: 'Unable to send message.' });
-  }
-});
-
-// Starting server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
