@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
- // Function to display phases when the menstrual phase link is clicked
+// Function to display phases when the menstrual phase link is clicked
   const initializeSubMenu = () => {
    const subMenu = document.getElementById('sub-menu');
    const menstrualPhaseLink = document.getElementById('menstrual-phase-link');
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initializeSubMenu();
 
-  // Function to add slide-in animation to the main content heading
+// Function to add slide-in animation to the main content heading
   const initializeMainContentAnimation = () => {
     const mainContentHeading = document.querySelector('#main-content h1');
     if (mainContentHeading) {
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initializeMainContentAnimation();
 
-  // Function to redirect to menstruation page on 'Get Started' button click
+// Function to redirect to menstruation page on 'Get Started' button click
   const initializeGetStartedButton = () => {
     const getStarted = document.getElementById('get-started');
     if (getStarted) {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initializeGetStartedButton();
 
-  // Function to redirect to home page on logo click
+// Function to redirect to home page on logo click
   const initializeLogoClick = () => {
     const logo = document.getElementById('logo');
     if (logo) {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initializeLogoClick();
 
-  // Function to navigate to specific phase pages
+// Function to navigate to specific phase pages
   const initializePhaseNavigation = () => {
   const navigateToPhase = (phase) => {
     console.log(`Navigating to ${phase}.html`);
@@ -114,7 +114,7 @@ const displayFoodSuggestions = async (phase, category) => {
     const data = await response.json();
 
     const foodSuggestions = document.getElementById('foodSuggestions');
-    foodSuggestions.innerHTML = ''; // Clear previous content
+    foodSuggestions.innerHTML = ''; 
     
     data.forEach(food => {
       const foodItem = document.createElement('div');
@@ -184,7 +184,7 @@ const initializeOutsideClickHandler = () => {
 initializeImageClicks();
 initializeOutsideClickHandler();
 
-  // Function to display feedback 
+// Function to display feedback 
   const initializeFeedbackSlider = () => {
   const feedbackItems = document.querySelectorAll('.feedback-item');
   const prevBtn = document.getElementById('prevBtn');
@@ -222,7 +222,7 @@ initializeOutsideClickHandler();
 
   initializeFeedbackSlider();
 
-  // Function to handle search form submission
+// Function to handle search form submission
   const initializeSearchForm = () => {
     const phasesButton = document.getElementById('button-phases');
     const searchPhase = document.getElementById('search-phase');
@@ -255,49 +255,9 @@ initializeOutsideClickHandler();
       console.error('Search button not found');
     }
   };
-});
-
   initializeSearchForm();
 
-//   // Function to send details of user to my email
-//   const contactForm = document.getElementById('contact-form');
-//   const nameInput = document.getElementById('name');
-//   const emailInput = document.getElementById('email');
-//   const messageInput = document.getElementById('message');
 
-//   if (contactForm && nameInput && emailInput && messageInput) {
-//     contactForm.addEventListener('submit', async (event) => {
-//       event.preventDefault();
+});
+  
 
-//       const name = nameInput.value;
-//       const email = emailInput.value;
-//       const message = messageInput.value;
-
-//       try {
-//         const response = await fetch('http://localhost:3000/contact', {
-//           method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//           body: JSON.stringify({ name, email, message }),
-//         });
-
-//         const result = await response.json();
-
-//         if (result.success) {
-//           alert(result.message);
-//           nameInput.value = '';
-//           emailInput.value = '';
-//           messageInput.value = '';
-//         } else {
-//           alert(result.message);
-//         }
-//       } catch (error) {
-//         alert('Unable to send message.');
-//       }
-//     });
-//   } else {
-//     console.error('Contact form elements not found.');
-//   }
-
-// });
